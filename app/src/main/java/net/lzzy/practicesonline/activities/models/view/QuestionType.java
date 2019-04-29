@@ -23,7 +23,7 @@ public enum QuestionType {
     public static QuestionType getInstance(int ordinal){
         for (QuestionType type:QuestionType.values()){
             if (type.ordinal()==ordinal){
-
+                    return type;
             }
         }
         return null;

@@ -1,6 +1,12 @@
 package net.lzzy.practicesonline.activities.models;
 
+import net.lzzy.practicesonline.activities.constants.ApiConstants;
+import net.lzzy.sqllib.Ignored;
+import net.lzzy.sqllib.Jsonable;
 import net.lzzy.sqllib.Sqlitable;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Date;
 
@@ -8,9 +14,12 @@ import java.util.Date;
  * Created by lzzy_gxy on 2019/4/16.
  * Description:
  */
-public class Practice extends BaseEntity implements Sqlitable {
+public class Practice extends BaseEntity implements Sqlitable, Jsonable {
+    @Ignored
     public static final String COL_NAME = "name";
+    @Ignored
     public static final String COL_OUTLINES = "outlines";
+    @Ignored
     public static final String COL_API_ID = "apiId";
     private String name;
 
@@ -18,7 +27,7 @@ public class Practice extends BaseEntity implements Sqlitable {
     private Date downloadDate;
     private String outlines;
     private boolean isDownloaded;
-    private  int apild;
+    private  int apiId;
 
     public String getName() {
         return name;
@@ -60,12 +69,12 @@ public class Practice extends BaseEntity implements Sqlitable {
         isDownloaded = downloaded;
     }
 
-    public int getApild() {
-        return apild;
+    public int getapiId() {
+        return apiId;
     }
 
-    public void setApild(int apild) {
-        this.apild = apild;
+    public void setapiId(int apild) {
+        this.apiId = apild;
     }
 
 
@@ -76,6 +85,21 @@ public class Practice extends BaseEntity implements Sqlitable {
     }
 
     public int getApiId() {
-        return apild;
+        return apiId;
     }
+
+    @Override
+    public JSONObject toJson() throws JSONException {
+        return null;
+    }
+
+    @Override
+    public void fromJson(JSONObject json) throws JSONException {
+        apiId = json.getInt(ApiConstants.JSON_PRACTICE_API_ID);
+        name=json.getString(ApiConstants.JSON_PRACTICE_NAME);
+        outlines=json.getString(ApiConstants.JSON_PRACTICE_OUTLINES);
+        questionCount=json.getInt(ApiConstants.JSON_PRACTICE_QUESTION_COUNT);
+        downloadDate=new Date();
+    }
+
 }

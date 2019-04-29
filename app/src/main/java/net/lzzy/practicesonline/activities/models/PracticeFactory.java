@@ -65,7 +65,7 @@ public class PracticeFactory {
     }
 
     /**  **/
-    public UUID getPractice(int apiId){
+    public UUID getPracticeId(int apiId){
         try {
             List<Practice> practices=repository.getByKeyword(String.valueOf(apiId),
                     new String[]{Practice.COL_API_ID},true);

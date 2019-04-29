@@ -38,4 +38,5 @@ public abstract class BaseFragment extends Fragment {
 
     }
     public abstract void search(String kw);
+
 }
