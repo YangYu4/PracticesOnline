@@ -14,6 +14,4 @@ public class DbConstants {
     public static DbPackager packager=DbPackager
             .getInstance(AppUtils.getContext(),DB_NAME,DB_VERSION, R.raw.models);
 
-
-
 }

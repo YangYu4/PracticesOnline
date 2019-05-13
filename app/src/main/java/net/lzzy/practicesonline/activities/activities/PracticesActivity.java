@@ -1,22 +1,14 @@
 package net.lzzy.practicesonline.activities.activities;
 
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.PersistableBundle;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import androidx.annotation.Nullable;
-
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-
 import net.lzzy.practicesonline.R;
 import net.lzzy.practicesonline.activities.fragments.PracticesFragment;
 import net.lzzy.practicesonline.activities.models.PracticeFactory;
@@ -30,10 +22,12 @@ import net.lzzy.practicesonline.activities.utils.ViewUtils;
  */
 public class PracticesActivity extends BaseActivity implements PracticesFragment.OnPracticesSelectedListener{
     public static final String EXTRA_LOCAL_COUNT ="localhost" ;
-    private static final String EXTRA_PRACTICE_ID ="practiceId" ;
-    private static final String EXTRA_API_ID = "apiId";
+    public static final String EXTRA_PRACTICE_ID ="extraPracticeId" ;
+    public static final String EXTRA_API_ID ="apiId" ;
     private ServiceConnection connection;
     private boolean refresh=false;
+    public static final String EXTRA_RESULT = "extraResult";
+    public static final int REQUEST_CODE_RESULT = 0;
 
 
 
@@ -132,7 +126,6 @@ public class PracticesActivity extends BaseActivity implements PracticesFragment
 
 
     }
-
 
     public void onBackPressed() {
         new AlertDialog.Builder(this)

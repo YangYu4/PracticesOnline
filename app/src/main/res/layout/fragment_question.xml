@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+         <TextView android:id="@+id/fragment_tv_question_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="1.单项选择"
+            android:textSize="16sp"
+            android:layout_marginStart="12dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/background_dark"/>
+
+        <ImageButton android:id="@+id/fragment_question_img_favorite"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@color/colorAccent"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="5dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView android:id="@+id/fragment_question_tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        tools:text="拉数据看到了开始调查辽宁省考进去欧瑞传到" />
+
+    <RadioGroup android:id="@+id/fragment_question_option_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+    </RadioGroup>
+
+</LinearLayout>

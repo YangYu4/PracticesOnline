@@ -1,9 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.activities.QuestionActivity">
+    tools:context=".activities.activities.QuestionActivity"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/activity_question_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <LinearLayout android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView android:id="@+id/activity_question_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="asfasdfasedfasdfsadf"
+                android:visibility="gone"
+                android:textColor="@android:color/holo_green_dark"/>
+
+            <LinearLayout android:id="@+id/activity_question_dots"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center">
+            </LinearLayout>
+
+        </LinearLayout>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView android:id="@+id/activity_question_tv_view"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:gravity="end|bottom"
+                android:paddingEnd="15dp"
+                android:paddingBottom="15dp"
+                android:background="@drawable/bg_text"
+                android:textSize="22sp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:text="看" />
+            <TextView android:id="@+id/activity_question_tv_commit"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:gravity="end|bottom"
+                android:background="@drawable/bg_text2"
+                android:text="交"
+                android:paddingEnd="15dp"
+                android:textSize="22sp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:paddingBottom="15dp" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
