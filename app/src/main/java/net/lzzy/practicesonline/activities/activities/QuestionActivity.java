@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -21,6 +22,7 @@ import androidx.viewpager.widget.ViewPager;
 import net.lzzy.practicesonline.R;
 import net.lzzy.practicesonline.activities.constants.ApiConstants;
 import net.lzzy.practicesonline.activities.fragments.QuestionFragment;
+import net.lzzy.practicesonline.activities.models.FavoriteFactory;
 import net.lzzy.practicesonline.activities.models.Question;
 import net.lzzy.practicesonline.activities.models.QuestionFactory;
 import net.lzzy.practicesonline.activities.models.UserCookies;
@@ -43,7 +45,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     public static final String EXTRA_PRACTICE_ID = "extraPracticeId";
     public static final String EXTRA_RESULT = "extraResult";
-    public static final int REQUEST_CODE_RESULT = 0;
+    public static final int REQUEST_CODE_RESULT = 2;
 
     private int apiId;
     private List<Question> questions;
@@ -112,10 +114,36 @@ public class QuestionActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CODE_RESULT);
     }
 
-        @Override
-    public void onActivityReenter(int resultCode, Intent data) {
-        super.onActivityReenter(resultCode, data);
-        //todo:返回查看数据(全部收藏)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==ResultActivity.RESULT_CODE&&requestCode==REQUEST_CODE_RESULT) {
+            pager.setCurrentItem(data.getIntExtra(ResultActivity.POSITION,-1));
+        }
+
+        if (requestCode==ResultActivity.RESULT_CODE_PRACTICE && resultCode==REQUEST_CODE_RESULT&&data!=null){
+            String practiceId=data.getStringExtra(ResultActivity.PRACTICES_ID);
+            if (!practiceId.isEmpty()){
+                List<Question> questionList=new ArrayList<>();
+                FavoriteFactory factory= FavoriteFactory.getInstance();
+                for (Question question:QuestionFactory.getInstance().getByPractice(practiceId)){
+                    if (factory.isQuestionStarred(question.getId().toString())){
+                        questionList.add(question);
+                    }
+                }
+                questions.clear();
+                questions.addAll(questionList);
+                initDots();
+                adapter.notifyDataSetChanged();
+                if (questions.size()>0){
+                    pager.setCurrentItem(0);
+                    refreshDots(0);
+                }
+
+            }
+
+        }
+
     }
 
     /**
@@ -174,6 +202,8 @@ public class QuestionActivity extends AppCompatActivity {
                 case WHAT_OK:
                     questionActivity.isCommitted = true;
                     Toast.makeText(questionActivity, "提交成功", Toast.LENGTH_SHORT).show();
+                    UserCookies.getInstance().commitPractice(questionActivity.practiceId);
+                    questionActivity.redirect();
                     break;
                 case WHAT_NO:
                     Toast.makeText(questionActivity, "提交失败", Toast.LENGTH_SHORT).show();
@@ -247,7 +277,6 @@ public class QuestionActivity extends AppCompatActivity {
         };
         pager.setAdapter(adapter);
     }
-
 
     /**
      * 获取Question数据

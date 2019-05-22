@@ -48,6 +48,7 @@
                 android:textSize="22sp"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
+                android:visibility="gone"
                 android:text="看" />
             <TextView android:id="@+id/activity_question_tv_commit"
                 android:layout_width="60dp"
@@ -59,6 +60,7 @@
                 android:textSize="22sp"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
+                android:visibility="gone"
                 android:paddingBottom="15dp" />
 
         </FrameLayout>

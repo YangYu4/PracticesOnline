@@ -61,7 +61,7 @@ public class UserCookies {
         spCommit.edit().putInt(practiceId, FLAG_COMMIT_Y).apply();
     }
 
-    private int getReadCount(String questionId) {
+    public int getReadCount(String questionId) {
         return spReadCount.getInt(questionId, 0);
     }
 
